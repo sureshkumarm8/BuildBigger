@@ -45,6 +45,27 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
     }
+
+    flavorDimensions "mode"
+
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+            dimension "mode"
+            versionName "1.0-free"
+            // this boolean can be accessed in java classes by using BuildConfig class
+            // and now you can identify if your app is the paid version or not
+            buildConfigField "boolean", "PAID_VERSION", "false"
+        }
+
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+            dimension "mode"
+            versionName "1.0-paid"
+            buildConfigField "boolean", "PAID_VERSION", "true"
+        }
+    }
+
 }
 
 dependencies {
@@ -52,6 +73,7 @@ dependencies {
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.google.android.gms:play-services-ads:17.1.1'
     implementation 'com.google.api-client:google-api-client:1.25.0'
     implementation 'com.google.http-client:google-http-client-android:1.25.0'
@@ -60,7 +82,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.1'
+    implementation 'com.android.support.test.espresso:espresso-idling-resource:3.0.1'
+
+
     implementation project(':backend')
     implementation project(':jokesjavalib')
     implementation project(':uiandroidlib')
+
+
 }

@@ -21,8 +21,6 @@ public class JokesProvider {
           "What does a nosey pepper do? Gets jalapeno business!"
     };
     public String getJoke(){
-        Random rand = new Random();
-        int value = rand.nextInt(jokes.length - 1);
-        return jokes[value];
+        return jokes[new Random().nextInt(jokes.length-1)];
     }
 }
